@@ -93,7 +93,7 @@
                                             </div>
                                             <div class="user-info d-none d-md-block">
                                                 <div class="user-status tw-capitalize">
-                                                    {{ implode(',',json_decode(Auth::user()->role->pluck('name')))}}
+                                                    {{ Auth::user()->role->name }}
                                                 </div>
                                                 <div class="user-name dropdown-indicator">{{-- Auth::user()->username --}}
                                                 </div>
