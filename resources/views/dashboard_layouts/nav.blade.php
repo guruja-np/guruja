@@ -88,12 +88,12 @@
                                                 @if (Auth::user()->avatar != null)
                                                 <img src="{{ Auth::user()->avatar }}" alt="">
                                                 @else
-                                                <span>{{ Str::initials(Auth::user()->full_name) }}</span>
+                                                <span>{{ strInitials(Auth::user()->full_name) }}</span>
                                                 @endif
                                             </div>
                                             <div class="user-info d-none d-md-block">
-                                                <div class="user-status tw-capitalize">{{
-                                                    implode(',',json_decode(Auth::user()->roles()->pluck('name')))}}
+                                                <div class="user-status tw-capitalize">
+                                                    {{ implode(',',json_decode(Auth::user()->role->pluck('name')))}}
                                                 </div>
                                                 <div class="user-name dropdown-indicator">{{-- Auth::user()->username --}}
                                                 </div>
@@ -107,23 +107,22 @@
                                                     @if (Auth::user()->avatar != null)
                                                     <img src="{{ Auth::user()->avatar }}" alt="">
                                                     @else
-                                                    <span>{{ Str::initials(Auth::user()->full_name) }}</span>
+                                                    <span>{{ strInitials(Auth::user()->full_name) }}</span>
                                                     @endif
                                                 </div>
                                                 <div class="user-info">
                                                     <span class="lead-text">{{ Auth::user()->full_name }}</span>
-                                                    <span class="sub-text tw-break-all">{{
-                                                        Auth::user()->email }}</span>
+                                                    <span class="sub-text tw-break-all">{{ Auth::user()->email }}</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="dropdown-inner">
                                             <ul class="link-list">
-                                                <li><a href="{{ route('changePassword') }}"><em
-                                                            class="icon ni ni-setting-alt"></em><span>Change
-                                                            Password</span></a></li>
-                                                <li><a class="dark-switch" href="#"><em
-                                                            class="icon ni ni-moon"></em><span>Dark Mode</span></a>
+                                                <li>
+                                                    <a href="{{-- route('changePassword') --}}"><em class="icon ni ni-setting-alt"></em><span>Change Password</span></a>
+                                                </li>
+                                                <li>
+                                                    <a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a>
                                                 </li>
                                             </ul>
                                         </div>

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone');
             $table->unsignedBigInteger('role_id');
+            $table->tinyInteger('status')->defaut(1);
             $table->rememberToken()->nullable();
             $table->timestamps();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('restrict');

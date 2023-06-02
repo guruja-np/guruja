@@ -1,4 +1,4 @@
 *
 !public/
 !.gitignore
-!app/menu.json
+!menu.json

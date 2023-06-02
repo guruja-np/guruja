@@ -19,16 +19,19 @@
     <div class="container">
         <div class="screen">
             <div class="screen__content">
-                <form class="login">
+                <form class="login" action="{{ url('/admin/login') }}" method="POST">
                     @csrf
                     <div class="login__field">
-                        <label>Email</label>
-                        <input type="email" class="login__input">
+                        <label for="email">Email</label>
+                        <input type="email" class="login__input" name="email" id="email">
                     </div>
                     <div class="login__field">
-                        <label>Password</label>
-                        <input type="password" class="login__input">
+                        <label for="password">Password</label>
+                        <input type="password" class="login__input" name="password" id="password">
                     </div>
+                    @if(session('error'))
+                        <div class="text-red">{{session('error')}}</div>
+                    @endif
                     <button class="button login__submit" type="submit">
                         <span class="button__text">Log In Now</span>
                     </button>
@@ -191,6 +194,15 @@
     .login__submit:hover {
         border-color: #6A679E;
         outline: none;
+    }
+
+    .text-red{
+        background-color:#DC143C;
+        padding: 20px 10px;
+        border-radius: 10px;
+        font-size: 0.8rem;
+        width: 250px;
+        color: white;
     }
 </style>
 

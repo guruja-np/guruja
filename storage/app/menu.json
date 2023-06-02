@@ -1,0 +1,32 @@
+{
+    "admin": {
+        "menu": [
+            {
+                "link": "#",
+                "name": "Admin Home",
+                "icon": "icon ni ni-menu-circled"
+            },
+            {
+                "link": "#",
+                "name": "Admin Submenus",
+                "icon": "icon ni ni-menu-circled",
+                "children": [
+                    {
+                        "link": "#",
+                        "name": "First Submenu",
+                        "icon": "icon ni ni-menu-circled"
+                    }
+                ]
+            }
+        ]
+    },
+    "teacher": {
+        "menu": [
+            {
+                "link": "#",
+                "name": "Teacher Home",
+                "icon": "icon ni ni-menu-circled"
+            }
+        ]
+    }
+}
