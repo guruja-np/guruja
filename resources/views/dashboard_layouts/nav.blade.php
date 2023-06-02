@@ -2,7 +2,7 @@
     <!-- main @s -->
     <div class="nk-main ">
         <!-- sidebar @s -->
-        <div class="nk-sidebar nk-sidebar-fixed is-light " data-content="sidebarMenu">
+        <div class="nk-sidebar nk-sidebar-fixed is-dark " data-content="sidebarMenu">
             <div class="nk-sidebar-element nk-sidebar-head">
                 <div class="nk-menu-trigger">
                     <a href="#" class="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em
@@ -83,8 +83,9 @@
                             <ul class="nk-quick-nav">
                                 <li class="dropdown user-dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        
                                         <div class="user-toggle">
-                                            <div class="user-avatar sm bg-primary tw-capitalize">
+                                            <div class="user-avatar sm">
                                                 @if (Auth::user()->avatar != null)
                                                 <img src="{{ Auth::user()->avatar }}" alt="">
                                                 @else
@@ -92,11 +93,8 @@
                                                 @endif
                                             </div>
                                             <div class="user-info d-none d-md-block">
-                                                <div class="user-status tw-capitalize">
-                                                    {{ Auth::user()->role->name }}
-                                                </div>
-                                                <div class="user-name dropdown-indicator">{{-- Auth::user()->username --}}
-                                                </div>
+                                                <div class="user-status">{{ Auth::user()->role->name }}</div>
+                                                <div class="user-name dropdown-indicator">{{ Auth::user()->full_name }}</div>
                                             </div>
                                         </div>
                                     </a>
@@ -137,19 +135,19 @@
                                                     onclick="document.getElementById('logout').submit();">
                                                     <em class="icon ni ni-signout"></em><span>{{ __('Logout') }}</span>
                                                 </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    </li><!-- .dropdown -->
-                    </ul><!-- .nk-quick-nav -->
-                </div><!-- .nk-header-tools -->
-            </div><!-- .nk-header-wrap -->
-        </div><!-- .container-fliud -->
-    </div>
-    <!-- main header @e -->
-    <!-- content @s -->
-    <div class="nk-content ">
-        <div class="container-fluid">
-            <div class="nk-content-inner">
-                <div class="nk-content-body">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li><!-- .dropdown -->
+                            </ul><!-- .nk-quick-nav -->
+                        </div><!-- .nk-header-tools -->
+                    </div><!-- .nk-header-wrap -->
+                </div><!-- .container-fliud -->
+            </div>
+            <!-- main header @e -->
+
+            <!-- content @s -->
+            <div class="nk-content ">
+                <div class="container-fluid">
+                    <div class="nk-content-inner">
+                        <div class="nk-content-body">

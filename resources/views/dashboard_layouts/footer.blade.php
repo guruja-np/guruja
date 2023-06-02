@@ -9,8 +9,7 @@
 <div class="nk-footer">
     <div class="container-fluid">
         <div class="nk-footer-wrap">
-            <div class="nk-footer-copyright"> &copy; 2023 - {{ date('Y') }} {{ env('APP_NAME') }}.
-            </div>
+            <div class="nk-footer-copyright"> &copy; {{ date('Y') }} {{ env('APP_NAME') }}.</div>
         </div>
     </div>
 </div>

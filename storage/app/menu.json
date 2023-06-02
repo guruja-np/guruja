@@ -2,14 +2,14 @@
     "admin": {
         "menu": [
             {
-                "link": "#",
-                "name": "Admin Home",
+                "link": "admin.dashboard.index",
+                "name": "Dashboard",
                 "icon": "icon ni ni-menu-circled"
             },
             {
                 "link": "#",
                 "name": "Admin Submenus",
-                "icon": "icon ni ni-menu-circled",
+                "icon": "icon ni ni-coin",
                 "children": [
                     {
                         "link": "#",
@@ -23,8 +23,8 @@
     "teacher": {
         "menu": [
             {
-                "link": "#",
-                "name": "Teacher Home",
+                "link": "teacher.dashbaord.index",
+                "name": "Dashboard",
                 "icon": "icon ni ni-menu-circled"
             }
         ]
