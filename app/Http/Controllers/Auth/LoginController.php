@@ -37,9 +37,9 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        if(auth()->user()->role->name == 'admin'){
+        if(auth()->user()->hasRole('admin')){
             $this->redirectTo = '/admin/dashboard';
-        }else if(auth()->user()->role->name == 'teacher'){
+        }else if(auth()->user()->hasRole('teacher')){
             $this->redirectTo = '/teacher/dashboard';
         }
     }
@@ -67,9 +67,9 @@ class LoginController extends Controller
             $userData = User::where('email', $fieldData['email'])->select('id', 'full_name','status')->first();
             $request->session()->put('userData', $userData);
             if(session()->get('userData.status') == 1){
-                if(auth()->user()->role->name == 'admin'){
+                if(auth()->user()->hasRole('admin')){
                     return redirect()->intended(route('admin.dashboard.index'));
-                }else if(auth()->user()->role->name == 'teacher'){
+                }else if(auth()->user()->hasRole('teacher')){
                     return redirect()->intended(route('teacher.dashboard.index'));
                 }
             }else{

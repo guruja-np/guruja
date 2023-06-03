@@ -10,9 +10,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        if(Auth::user()->role->name == 'admin'){
+        if(Auth::user()->hasRole('admin')){
             return self::adminDashboard();
-        }else if(Auth::user()->role->name == 'teacher'){
+        }else if(Auth::user()->hasRole('teacher')){
             return self::teacherDashboard();
         }
         Auth::logout();

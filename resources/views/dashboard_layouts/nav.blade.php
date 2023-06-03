@@ -93,7 +93,7 @@
                                                 @endif
                                             </div>
                                             <div class="user-info d-none d-md-block">
-                                                <div class="user-status">{{ Auth::user()->role->name }}</div>
+                                                <div class="user-status">{{ implode(',',json_decode(Auth::user()->roles()->pluck('name'))) }}</div>
                                                 <div class="user-name dropdown-indicator">{{ Auth::user()->full_name }}</div>
                                             </div>
                                         </div>

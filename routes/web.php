@@ -28,7 +28,7 @@ Auth::routes([
     'verify' => false,
 ]);
 Route::get('/admin/login', function () {
-    if (Auth::check() && Auth::user()->role->name == 'admin') {
+    if (Auth::check() && Auth::user()->hasRole('admin')) {
         return Redirect::to('/admin/dashboard');
     }
     return view('auth/admin_login');
@@ -38,7 +38,7 @@ Route::post('/admin/logout',[LoginController::class, 'logout']);
 Route::get('/teacher/login', function () {
     if (Auth::check() && Auth::user()->role->name  == 'teacher') {
         return Redirect::to('/teacher/dashboard');
-    }else if (Auth::check() && Auth::user()->role->name == 'admin') {
+    }else if (Auth::check() && Auth::user()->hasRole('admin')) {
         return Redirect::to('/admin/dashboard');
     }
     return view('auth/teacher_login');

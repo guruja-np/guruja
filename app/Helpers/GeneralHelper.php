@@ -11,15 +11,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 if (!\function_exists('getMenu')) {
     function getMenu()
     {
-        if (true) {
+        if (Auth::check()) {
             $menuList = File::get(storage_path('app/menu.json'));
-            //$roles = json_decode(Auth::user()->roles()->pluck('name'));
-            //$role = reset($roles);
+            $roles = json_decode(Auth::user()->roles()->pluck('name'));
+            $role = reset($roles);
             $menus = json_decode($menuList);
-            if (property_exists($menus, 'admin')) {
-                $menu = $menus->admin->menu;
-            } else if (property_exists($menus, 'teacher')) {
-                $menu = $menus->teacher->menu;
+            if (property_exists($menus, $role)) {
+                $menu = $menus->$role->menu;
             } else {
                 throw new Exception('Role Menu not Assigned');
             }
