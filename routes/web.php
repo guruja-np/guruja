@@ -50,7 +50,8 @@ Route::post('/teacher/logout',[LoginController::class, 'logout']);
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/dashboard', DashboardController::class);
-
+    
+    Route::get('/category/list', [CategoryController::class, 'getCategories'])->name('category.list');
     Route::resource('/category', CategoryController::class);
 });
 

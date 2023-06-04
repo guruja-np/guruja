@@ -3,7 +3,7 @@
 !function (NioApp, $) {
   "use strict";
 
-  NioApp.Package.name = "AmaBuba";
+  NioApp.Package.name = "Guruja";
   NioApp.Package.version = "1.0";
   var $win = $(window),
     $body = $('body'),
@@ -550,11 +550,6 @@
 
 
   NioApp.DataTable.init = function () {
-    NioApp.DataTable('.datatable-init', {
-      responsive: {
-        details: true
-      }
-    });
     NioApp.DataTable('.datatable-init-export', {
       responsive: {
         details: true

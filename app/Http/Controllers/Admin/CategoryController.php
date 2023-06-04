@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DataTables;
 
 class CategoryController extends Controller
 {
@@ -15,6 +16,17 @@ class CategoryController extends Controller
     {
         $dataReturn['categories'] = Category::latest()->get();
         return view('admin.categories', $dataReturn);
+    }
+
+    public function getCategories(Request $request)
+    {
+        if($request->ajax()){
+            $categories = Category::query();
+            // $data = Category::latest()->get();
+            return Datatables::of($categories)
+                ->addIndexColumn()
+                ->make(true);
+        }
     }
 
     /**

@@ -4,21 +4,13 @@
 <div class="nk-block-head nk-block-head-sm">
     <div class="nk-block-between">
         <div class="nk-block-head-content">
-            <h3 class="nk-block-title page-title">Products</h3>
+            <h3 class="nk-block-title page-title">Categories</h3>
         </div><!-- .nk-block-head-content -->
         <div class="nk-block-head-content">
             <div class="toggle-wrap nk-block-tools-toggle">
                 <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
                 <div class="toggle-expand-content" data-content="pageMenu">
                     <ul class="nk-block-tools g-3">
-                        <li>
-                            <div class="form-control-wrap">
-                                <div class="form-icon form-icon-right">
-                                    <em class="icon ni ni-search"></em>
-                                </div>
-                                <input type="text" class="form-control" id="default-04" placeholder="Quick search by id">
-                            </div>
-                        </li>
                         <li class="nk-block-tools-opt">
                             <a href="#" data-target="addProduct" class="toggle btn btn-icon btn-primary d-md-none"><em class="icon ni ni-plus"></em></a>
                             <a href="#" data-target="addProduct" class="toggle btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Add Category</span></a>
@@ -34,7 +26,7 @@
         <div class="card-inner-group">
             <div class="card-inner p-4">
                 <!-- Table here...  -->
-                <table class="nowrap table">
+                <table class="datatable-init nowrap table" id="categories-table">
                     <thead>
                         <tr>
                             <th>SN</th>
@@ -43,15 +35,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $category)    
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $category->category_name }}</td>
-                            <td>
-                                <button>Action</button>
-                            </td>
-                        </tr>
-                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -144,7 +127,32 @@
 @endsection
 @section('dashboard_layouts/script')
 <script>
+    $(document).ready(function() {
+        
+        NioApp.DataTable('.datatable-init', {
+            responsive: {
+                details: true
+            },
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.category.list') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+                {data: 'category_name', name: 'category_name'},
+                {
+                    data: null,
+                    name: 'actions', 
+                    orderable: false, 
+                    searchable: false, 
+                    render: function (data, type, row){
+                        return `Render Action`;
+                    }
+                }
+            ],
+        });
 
+
+    })
 </script>
 
 @endsection
