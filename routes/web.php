@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Shared\DashboardController;
 
 /*
@@ -49,6 +50,8 @@ Route::post('/teacher/logout',[LoginController::class, 'logout']);
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/dashboard', DashboardController::class);
+
+    Route::resource('/category', CategoryController::class);
 });
 
 Route::prefix('teacher')->name('teacher.')->middleware(['auth', 'user-access:teacher'])->group(function () {

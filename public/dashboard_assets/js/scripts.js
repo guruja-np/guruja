@@ -111,7 +111,7 @@
       var self = $(this),
         _self_link = self.attr('href');
       let linkArr = _self_link.split('/');
-      if (linkArr[3] != undefined && fileName.split('/')[3] == linkArr[3]) {
+      if (linkArr[4] != undefined && fileName.split('/')[4] == linkArr[4]) {
         self.closest("li").addClass('active current-page').parents().closest("li").addClass("active current-page");
         self.closest("li").children('.nk-menu-sub').css('display', 'block');
         self.parents().closest("li").children('.nk-menu-sub').css('display', 'block');

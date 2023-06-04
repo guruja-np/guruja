@@ -2,9 +2,22 @@
     "admin": {
         "menu": [
             {
+                "link": "heading",
+                "name": "dashboard"
+            },
+            {
                 "link": "admin.dashboard.index",
                 "name": "Dashboard",
-                "icon": "icon ni ni-menu-circled"
+                "icon": "icon ni ni-view-grid-fill"
+            },
+            {
+                "link": "heading",
+                "name": "model sets"
+            },
+            {
+                "link": "admin.category.index",
+                "name": "Manage Categories",
+                "icon": "icon ni ni-list-index-fill"
             },
             {
                 "link": "#",
@@ -23,9 +36,13 @@
     "teacher": {
         "menu": [
             {
+                "link": "heading",
+                "name": "dashboard"
+            },
+            {
                 "link": "teacher.dashbaord.index",
                 "name": "Dashboard",
-                "icon": "icon ni ni-menu-circled"
+                "icon": "icon ni ni-view-grid-fill"
             }
         ]
     }
