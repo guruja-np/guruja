@@ -6,5 +6,3 @@
 @yield('dashboard_layouts/content')
 {{-- html footer --}}
 @include('dashboard_layouts/footer')
-{{-- model content dynamically add if any --}}
-@yield('dashboard_layouts/modal')

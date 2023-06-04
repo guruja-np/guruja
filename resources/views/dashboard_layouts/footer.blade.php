@@ -20,8 +20,9 @@
         <!-- main @e -->
         </div>
         <!-- app-root @e -->
-        <!-- JavaScript -->
+        @yield('dashboard_layouts/modal')
 
+        <!-- JavaScript -->
         <script src="{{ asset('dashboard_assets/js/bundle.js?ver=2.9.1') }}"></script>
         <script src="{{ asset('dashboard_assets/js/scripts.js?ver=2.9.1') }}"></script>
         <!-- vanilla toast script -->

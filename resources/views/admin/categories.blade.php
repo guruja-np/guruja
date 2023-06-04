@@ -12,8 +12,8 @@
                 <div class="toggle-expand-content" data-content="pageMenu">
                     <ul class="nk-block-tools g-3">
                         <li class="nk-block-tools-opt">
-                            <a href="#" data-target="addProduct" class="toggle btn btn-icon btn-primary d-md-none"><em class="icon ni ni-plus"></em></a>
-                            <a href="#" data-target="addProduct" class="toggle btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Add Category</span></a>
+                            <a href="#" data-target="addCategory" class="toggle btn btn-icon btn-primary d-md-none"><em class="icon ni ni-plus"></em></a>
+                            <a href="#" data-target="addCategory" class="toggle btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Add Category</span></a>
                         </li>
                     </ul>
                 </div>
@@ -27,132 +27,202 @@
             <div class="card-inner p-4">
                 <!-- Table here...  -->
                 <table class="datatable-init nowrap table" id="categories-table">
-                    <thead>
-                        <tr>
-                            <th>SN</th>
-                            <th>Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div><!-- .nk-block -->
-<div class="nk-add-product toggle-slide toggle-slide-right" data-content="addProduct" data-toggle-screen="any" data-toggle-overlay="true" data-toggle-body="true" data-simplebar>
+<!-- Start of Add Category Slider -->
+<div class="nk-add-product toggle-slide toggle-slide-right" data-content="addCategory" data-toggle-screen="any" data-toggle-overlay="true" data-toggle-body="true" data-simplebar>
     <div class="nk-block-head">
         <div class="nk-block-head-content">
-            <h5 class="nk-block-title">New Product</h5>
+            <h5 class="nk-block-title">New Category</h5>
             <div class="nk-block-des">
-                <p>Add information and add new product.</p>
+                <p>Add information and add new category.</p>
             </div>
         </div>
     </div><!-- .nk-block-head -->
     <div class="nk-block">
-        <div class="row g-3">
-            <div class="col-12">
-                <div class="form-group">
-                    <label class="form-label" for="product-title">Product Title</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="product-title">
+        <form action="#" method="POST" class="form-validate" id="add-category-form">
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="form-label" for="category-name">Category Name</label>
+                        <div class="form-control-wrap">
+                            <input type="text" class="form-control" id="category-name" name="category_name" required>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="form-label" for="regular-price">Regular Price</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="regular-price">
-                    </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit"><em class="icon ni ni-plus"></em><span>Add New</span></button>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="form-label" for="sale-price">Sale Price</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="sale-price">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="form-label" for="stock">Stock</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="stock">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="form-label" for="SKU">SKU</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="SKU">
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="form-group">
-                    <label class="form-label" for="category">Category</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="category">
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="form-group">
-                    <label class="form-label" for="tags">Tags</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="tags">
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="upload-zone small bg-lighter my-2">
-                    <div class="dz-message">
-                        <span class="dz-message-text">Drag and drop file</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <button class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add New</span></button>
-            </div>
-        </div>
+        <form>
     </div><!-- .nk-block -->
 </div>
+<!-- End of Add Category Slider -->
 @endsection
 @section('dashboard_layouts/modal')
-    
+<form></form>
+
+<!-- Edit Category Modal Form -->
+<div class="modal fade" id="editCategoryModal">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Existing Category</h5>
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <em class="icon ni ni-cross"></em>
+                </a>
+            </div>
+            <form action="#" class="form-validate is-alter" id="edit-category-form">
+                <div class="modal-body">
+                    <div class="row g-4">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-label" for="edit-category-name">Category Name</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" data-msg="category is required" id="edit-category-name" name="category_name" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-primary tw-mr-2">Update</button>
+                        <button type="reset" data-dismiss="modal" class="btn btn-lg btn-light">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Edit Category Modal Form -->
 @endsection
 @section('dashboard_layouts/script')
 <script>
-    $(document).ready(function() {
+    // $(document).ready(function() {
+    // })
         
-        NioApp.DataTable('.datatable-init', {
-            responsive: {
-                details: true
-            },
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('admin.category.list') }}",
-            columns: [
-                {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
-                {data: 'category_name', name: 'category_name'},
-                {
-                    data: null,
-                    name: 'actions', 
-                    orderable: false, 
-                    searchable: false, 
-                    render: function (data, type, row){
-                        return `Render Action`;
-                    }
+    //Datatable
+    NioApp.DataTable('.datatable-init', {
+        responsive: {
+            details: true
+        },
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('admin.category.list') }}",
+        columns: [
+            {title: 'SN', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+            {title: 'Name', data: 'category_name', name: 'category_name'},
+            {
+                title: 'Actions',
+                data: null,
+                name: 'actions', 
+                orderable: false, 
+                searchable: false, 
+                render: function (data, type, row){
+                    const categoryJSON = jsonStringParser(row);
+                    return `
+                    <td>
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <ul class="link-list-opt no-bdr">
+                                    <li><a href="#" data-toggle="modal" data-target="#editCategoryModal" data-info="${categoryJSON}">
+                                        <em class="icon ni ni-edit"></em><span>Edit Category</span>
+                                    </a></li>
+                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>View Category</span></a></li>
+                                    <li><a href="#" onclick="deleteCategory(${row.id})"><em class="icon ni ni-trash"></em><span>Remove Category</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    `;
                 }
-            ],
-        });
+            }
+        ],
+    });
 
+    // Add Category
+    $('#add-category-form').on('submit', function(e){
+        e.preventDefault();
+        if($('#add-category-form').valid()){
+            let formData = $('#add-category-form').serialize();
+            console.log(formData);
+            axios.post('category', formData)
+                .then(response => {
+                    // draw() isn't working!!!
+                    // Refresh the DataTable
+                    vt.success(response.data);
+                    $('.datatable-init').DataTable().ajax.reload();
+                    $("#add-category-form").trigger("reset");
+                    $('div[data-content="addCategory"]').removeClass("content-active");
+                })
+                .catch(error => {
+                    vt.error(error.response.data.message);
+                });
+        }
+    });
 
-    })
+    /*
+    $('[data-target="#editCategoryModal"]').on('click', function(e) {
+        const categoryData = $(this).data('info');
+        $('#edit-category-name[name="category_name"]').val(categoryData.category_name);
+    });
+    */
+
+    let toEditCategory = {};
+    $(document).on('click','[data-target="#editCategoryModal"]', function(e){
+        toEditCategory = $(this).data('info');
+        $('#edit-category-name[name="category_name"]').val(toEditCategory.category_name);
+    });
+    
+    // Update Category
+    $('#edit-category-form').on('submit', function(e){
+        e.preventDefault();
+
+        // Get latest edited form data
+        editedFormData = {
+            'id': toEditCategory.id,
+            'category_name': $('#edit-category-name[name="category_name"]').val(),
+        };
+
+        if($('#edit-category-form').valid()){
+            axios.patch('category/'+editedFormData.id, editedFormData)
+                .then(response => {
+                    vt.success(response.data);
+                    $('.datatable-init').DataTable().ajax.reload();
+                    $('#editCategoryModal').modal('hide');
+                }).catch(err => {
+                    vt.error(err.response.data.message);
+                })
+        }
+    });
+
+    // Delete Category
+    function deleteCategory(id){
+        Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0971fe',
+                confirmButtonText: 'Yes, delete it!'
+            })
+            .then(function(result) {
+                if (result.value) {
+                    axios.delete("category/" + id)
+                        .then(res => {
+                            vt.success(res.data);
+                            $('.datatable-init').DataTable().ajax.reload();
+                        }).catch(err => {
+                            vt.error(err.response.data.message);
+                        })
+                }
+            });
+    }
 </script>
 
 @endsection

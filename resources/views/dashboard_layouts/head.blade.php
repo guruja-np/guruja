@@ -15,7 +15,6 @@
     <!-- Page Title  -->
     <title>{{ env('APP_NAME') }}</title>
     <!-- StyleSheets  -->
-    <!-- <link rel="stylesheet" href="{{-- asset('css/app.css') --}}"> -->
     <link rel="stylesheet" href="{{ asset('dashboard_assets/css/dashlite.css?ver=2.9.1') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('dashboard_assets/css/theme.css?ver=2.9.1') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('dashboard_assets/css/skins/theme-blue.css?ver=2.9.1') }}">
