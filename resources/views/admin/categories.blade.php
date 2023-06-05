@@ -147,14 +147,17 @@
     $('#add-category-form').on('submit', function(e){
         e.preventDefault();
         if($('#add-category-form').valid()){
-            let formData = $('#add-category-form').serialize();
-            console.log(formData);
+            const formData = $('#add-category-form').serialize();
             axios.post('category', formData)
                 .then(response => {
                     vt.success(response.data);
                     $('.datatable-init').DataTable().ajax.reload();
                     $("#add-category-form").trigger("reset");
+                    // 3 manual step for closing slider :O 
+                    // more beneficial to use modal next time for insert!
                     $('div[data-content="addCategory"]').removeClass("content-active");
+                    $('body').removeClass("toggle-shown");
+                    $('.toggle-overlay[data-target="addCategory"]').remove();
                 })
                 .catch(error => {
                     vt.error(error.response.data.message);
@@ -189,10 +192,12 @@
             axios.patch('category/'+editedFormData.id, editedFormData)
                 .then(response => {
                     vt.success(response.data);
-                    // draw(false) will only update the data required for current pagination. So, better for updating data
+                    // draw(false) will only update the data required for current pagination. So, better for updating & deleting data
                     // ajax().reload() will update the entire datatable and go to page 1 which will be beneficial for adding data
                     $('.datatable-init').DataTable().draw(false);
-                    $('#editCategoryModal').modal('hide');
+                    // $('#editCategoryModal').modal('hide'); -> not working!
+                    // alternative for closing modal, works fine :)
+                    $('#editCategoryModal a.close').trigger('click');
                 }).catch(err => {
                     vt.error(err.response.data.message);
                 })
