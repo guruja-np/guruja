@@ -27,7 +27,7 @@ class CategoryController extends Controller
             return Datatables::eloquent($categories)
                 // ->orderColumn('created_at','asc')
                 ->order(function ($query) {
-                    $query->orderBy('updated_at', 'desc');
+                    $query->orderBy('created_at', 'desc');
                 })
                 ->addIndexColumn()
                 ->make(true);

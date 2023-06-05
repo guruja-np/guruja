@@ -57,14 +57,12 @@
                     <button class="btn btn-primary" type="submit"><em class="icon ni ni-plus"></em><span>Add New</span></button>
                 </div>
             </div>
-        <form>
+        </form>
     </div><!-- .nk-block -->
 </div>
 <!-- End of Add Category Slider -->
 @endsection
 @section('dashboard_layouts/modal')
-<form></form>
-
 <!-- Edit Category Modal Form -->
 <div class="modal fade" id="editCategoryModal">
     <div class="modal-dialog modal-sm" role="document">
@@ -153,8 +151,6 @@
             console.log(formData);
             axios.post('category', formData)
                 .then(response => {
-                    // draw() isn't working!!!
-                    // Refresh the DataTable
                     vt.success(response.data);
                     $('.datatable-init').DataTable().ajax.reload();
                     $("#add-category-form").trigger("reset");
@@ -193,7 +189,9 @@
             axios.patch('category/'+editedFormData.id, editedFormData)
                 .then(response => {
                     vt.success(response.data);
-                    $('.datatable-init').DataTable().ajax.reload();
+                    // draw(false) will only update the data required for current pagination. So, better for updating data
+                    // ajax().reload() will update the entire datatable and go to page 1 which will be beneficial for adding data
+                    $('.datatable-init').DataTable().draw(false);
                     $('#editCategoryModal').modal('hide');
                 }).catch(err => {
                     vt.error(err.response.data.message);
@@ -216,7 +214,7 @@
                     axios.delete("category/" + id)
                         .then(res => {
                             vt.success(res.data);
-                            $('.datatable-init').DataTable().ajax.reload();
+                            $('.datatable-init').DataTable().draw(false);
                         }).catch(err => {
                             vt.error(err.response.data.message);
                         })
