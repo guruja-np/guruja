@@ -1,6 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Shared\DashboardController;
@@ -37,7 +41,7 @@ Route::get('/admin/login', function () {
 Route::post('/admin/login',[LoginController::class, 'login']);
 Route::post('/admin/logout',[LoginController::class, 'logout']);
 Route::get('/teacher/login', function () {
-    if (Auth::check() && Auth::user()->role->name  == 'teacher') {
+    if (Auth::check() && Auth::user()->hasRole('teacher')) {
         return Redirect::to('/teacher/dashboard');
     }else if (Auth::check() && Auth::user()->hasRole('admin')) {
         return Redirect::to('/admin/dashboard');
@@ -53,6 +57,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'user-access:admin']
     
     Route::get('/category/list', [CategoryController::class, 'getCategories'])->name('category.list');
     Route::resource('/category', CategoryController::class);
+
+    Route::get('/manage-user/list/{roleName}', [UserController::class, 'getUsers'])->name('manage-user.list');
+    Route::resource('/manage-user', UserController::class);
 });
 
 Route::prefix('teacher')->name('teacher.')->middleware(['auth', 'user-access:teacher'])->group(function () {

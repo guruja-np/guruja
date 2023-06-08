@@ -15,8 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $dataReturn['categories'] = Category::latest()->get();
-        return view('admin.categories', $dataReturn);
+        return view('admin.categories');
     }
 
     public function getCategories(Request $request)

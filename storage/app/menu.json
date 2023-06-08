@@ -3,12 +3,21 @@
         "menu": [
             {
                 "link": "heading",
-                "name": "dashboard"
+                "name": "home"
             },
             {
                 "link": "admin.dashboard.index",
                 "name": "Dashboard",
                 "icon": "icon ni ni-view-grid-fill"
+            },
+            {
+                "link": "heading",
+                "name": "general"
+            },
+            {
+                "link": "admin.manage-user.index",
+                "name": "Manage Users",
+                "icon": "icon ni ni-users"
             },
             {
                 "link": "heading",

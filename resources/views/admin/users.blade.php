@@ -4,7 +4,7 @@
 <div class="nk-block-head nk-block-head-sm">
     <div class="nk-block-between">
         <div class="nk-block-head-content">
-            <h3 class="nk-block-title page-title">Products</h3>
+            <h3 class="nk-block-title page-title">Manage Users</h3>
         </div><!-- .nk-block-head-content -->
         <div class="nk-block-head-content">
             <div class="toggle-wrap nk-block-tools-toggle">
@@ -12,28 +12,21 @@
                 <div class="toggle-expand-content" data-content="pageMenu">
                     <ul class="nk-block-tools g-3">
                         <li>
-                            <div class="form-control-wrap">
-                                <div class="form-icon form-icon-right">
-                                    <em class="icon ni ni-search"></em>
-                                </div>
-                                <input type="text" class="form-control" id="default-04" placeholder="Quick search by id">
-                            </div>
-                        </li>
-                        <li>
-                            <div class="drodown">
-                                <a href="#" class="dropdown-toggle dropdown-indicator btn btn-outline-light btn-white" data-toggle="dropdown">Status</a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <ul class="link-list-opt no-bdr">
-                                        <li><a href="#"><span>New Items</span></a></li>
-                                        <li><a href="#"><span>Featured</span></a></li>
-                                        <li><a href="#"><span>Out of Stock</span></a></li>
-                                    </ul>
+                            <div class="form-control-wrap ">
+                                <div class="form-control-select">
+                                    <select class="form-control" id="role-filter">
+                                    @forelse ($roles as $role)
+                                        <option value="{{ $role->name }}">{{ ucfirst($role->name) }}</option>
+                                    @empty
+                                    @endforelse
+                                        <option value="all">All</option>
+                                    </select>
                                 </div>
                             </div>
                         </li>
                         <li class="nk-block-tools-opt">
-                            <a href="#" data-target="addProduct" class="toggle btn btn-icon btn-primary d-md-none"><em class="icon ni ni-plus"></em></a>
-                            <a href="#" data-target="addProduct" class="toggle btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Add Product</span></a>
+                            <a href="#" data-target="add-user" class="toggle btn btn-icon btn-primary d-md-none"><em class="icon ni ni-plus"></em></a>
+                            <a href="#" data-target="add-user" class="toggle btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Add User</span></a>
                         </li>
                     </ul>
                 </div>
@@ -44,652 +37,329 @@
 <div class="nk-block">
     <div class="card card-bordered">
         <div class="card-inner-group">
-            <div class="card-inner p-0">
-                <div class="nk-tb-list">
-                    <div class="nk-tb-item nk-tb-head">
-                        <div class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="pid">
-                                <label class="custom-control-label" for="pid"></label>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm"><span>Name</span></div>
-                        <div class="nk-tb-col"><span>SKU</span></div>
-                        <div class="nk-tb-col"><span>Price</span></div>
-                        <div class="nk-tb-col"><span>Stock</span></div>
-                        <div class="nk-tb-col tb-col-md"><span>Category</span></div>
-                        <div class="nk-tb-col tb-col-md"><em class="tb-asterisk icon ni ni-star-round"></em></div>
-                        <div class="nk-tb-col nk-tb-col-tools">
-                            <ul class="nk-tb-actions gx-1 my-n1">
-                                <li class="mr-n1">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Selected</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Selected</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-bar-c"></em><span>Update Stock</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-invest"></em><span>Update Price</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- .nk-tb-item -->
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="pid1">
-                                <label class="custom-control-label" for="pid1"></label>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <span class="tb-product">
-                                <img src="./images/product/a.png" alt="" class="thumb">
-                                <span class="title">Pink Fitness Tracker</span>
-                            </span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">UY3749</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-lead">$ 99.49</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">49</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">Fitbit, Tracker</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <div class="asterisk tb-asterisk">
-                                <a href="#"><em class="asterisk-off icon ni ni-star"></em><em class="asterisk-on icon ni ni-star-fill"></em></a>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col nk-tb-col-tools">
-                            <ul class="nk-tb-actions gx-1 my-n1">
-                                <li class="mr-n1">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Product</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- .nk-tb-item -->
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="pid2">
-                                <label class="custom-control-label" for="pid2"></label>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <span class="tb-product">
-                                <img src="./images/product/b.png" alt="" class="thumb">
-                                <span class="title">Purple Smartwatch</span>
-                            </span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">UY3750</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-lead">$ 89.49</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">103</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">Gadgets, Fitbit, Tracker</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <div class="asterisk tb-asterisk">
-                                <a href="#"><em class="asterisk-off icon ni ni-star"></em><em class="asterisk-on icon ni ni-star-fill"></em></a>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col nk-tb-col-tools">
-                            <ul class="nk-tb-actions gx-1 my-n1">
-                                <li class="mr-n1">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Product</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- .nk-tb-item -->
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="pid3">
-                                <label class="custom-control-label" for="pid3"></label>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <span class="tb-product">
-                                <img src="./images/product/c.png" alt="" class="thumb">
-                                <span class="title">Black Mi Band Smartwatch</span>
-                            </span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">UY3751</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-lead">$ 299.49</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">68</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">Smartwatch, Tracker</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <div class="asterisk tb-asterisk">
-                                <a href="#" class="active"><em class="asterisk-off icon ni ni-star"></em><em class="asterisk-on icon ni ni-star-fill"></em></a>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col nk-tb-col-tools">
-                            <ul class="nk-tb-actions gx-1 my-n1">
-                                <li class="mr-n1">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Product</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- .nk-tb-item -->
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="pid4">
-                                <label class="custom-control-label" for="pid4"></label>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <span class="tb-product">
-                                <img src="./images/product/d.png" alt="" class="thumb">
-                                <span class="title">Black Headphones</span>
-                            </span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">UY3752</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-lead">$ 99.49</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">77</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">Headphone, Gadgets</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <div class="asterisk tb-asterisk">
-                                <a href="#"><em class="asterisk-off icon ni ni-star"></em><em class="asterisk-on icon ni ni-star-fill"></em></a>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col nk-tb-col-tools">
-                            <ul class="nk-tb-actions gx-1 my-n1">
-                                <li class="mr-n1">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Product</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- .nk-tb-item -->
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="pid5">
-                                <label class="custom-control-label" for="pid5"></label>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <span class="tb-product">
-                                <img src="./images/product/e.png" alt="" class="thumb">
-                                <span class="title">iPhone 7 Headphones</span>
-                            </span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">UY3753</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-lead">$ 129.49</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">81</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">Headphone, Gadgets</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <div class="asterisk tb-asterisk">
-                                <a href="#"><em class="asterisk-off icon ni ni-star"></em><em class="asterisk-on icon ni ni-star-fill"></em></a>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col nk-tb-col-tools">
-                            <ul class="nk-tb-actions gx-1 my-n1">
-                                <li class="mr-n1">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Product</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- .nk-tb-item -->
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="pid6">
-                                <label class="custom-control-label" for="pid6"></label>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <span class="tb-product">
-                                <img src="./images/product/f.png" alt="" class="thumb">
-                                <span class="title">Purple Blue Gradient iPhone Case</span>
-                            </span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">UY3754</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-lead">$ 29.00</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">28</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">Case, Gadgets</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <div class="asterisk tb-asterisk">
-                                <a href="#"><em class="asterisk-off icon ni ni-star"></em><em class="asterisk-on icon ni ni-star-fill"></em></a>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col nk-tb-col-tools">
-                            <ul class="nk-tb-actions gx-1 my-n1">
-                                <li class="mr-n1">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Product</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- .nk-tb-item -->
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="pid7">
-                                <label class="custom-control-label" for="pid7"></label>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <span class="tb-product">
-                                <img src="./images/product/g.png" alt="" class="thumb">
-                                <span class="title">Plug In Speaker</span>
-                            </span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">UY3755</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-lead">$ 19.49</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">62</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">Gadgets, Speaker</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <div class="asterisk tb-asterisk">
-                                <a href="#"><em class="asterisk-off icon ni ni-star"></em><em class="asterisk-on icon ni ni-star-fill"></em></a>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col nk-tb-col-tools">
-                            <ul class="nk-tb-actions gx-1 my-n1">
-                                <li class="mr-n1">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Product</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- .nk-tb-item -->
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="pid8">
-                                <label class="custom-control-label" for="pid8"></label>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <span class="tb-product">
-                                <img src="./images/product/h.png" alt="" class="thumb">
-                                <span class="title">Wireless Waterproof Speaker</span>
-                            </span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">UY3756</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-lead">$ 59.00</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">37</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">Speaker, Gadgets</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <div class="asterisk tb-asterisk">
-                                <a href="#"><em class="asterisk-off icon ni ni-star"></em><em class="asterisk-on icon ni ni-star-fill"></em></a>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col nk-tb-col-tools">
-                            <ul class="nk-tb-actions gx-1 my-n1">
-                                <li class="mr-n1">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Product</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- .nk-tb-item -->
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="pid9">
-                                <label class="custom-control-label" for="pid9"></label>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <span class="tb-product">
-                                <img src="./images/product/j.png" alt="" class="thumb">
-                                <span class="title">AliExpress Fitness Trackers</span>
-                            </span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">UY3758</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-lead">$ 35.99</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">145</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">Fitbit, Tracker</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <div class="asterisk tb-asterisk">
-                                <a href="#"><em class="asterisk-off icon ni ni-star"></em><em class="asterisk-on icon ni ni-star-fill"></em></a>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col nk-tb-col-tools">
-                            <ul class="nk-tb-actions gx-1 my-n1">
-                                <li class="mr-n1">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Product</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- .nk-tb-item -->
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="pid10">
-                                <label class="custom-control-label" for="pid10"></label>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <span class="tb-product">
-                                <img src="./images/product/i.png" alt="" class="thumb">
-                                <span class="title">Pool Party Drink Holder</span>
-                            </span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">UY3757</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-lead">$ 9.49</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub">73</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">Men, Holder</span>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <div class="asterisk tb-asterisk">
-                                <a href="#"><em class="asterisk-off icon ni ni-star"></em><em class="asterisk-on icon ni ni-star-fill"></em></a>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col nk-tb-col-tools">
-                            <ul class="nk-tb-actions gx-1 my-n1">
-                                <li class="mr-n1">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Product</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- .nk-tb-item -->
-                </div><!-- .nk-tb-list -->
-            </div>
-            <div class="card-inner">
-                <div class="nk-block-between-md g-3">
-                    <div class="g">
-                        <ul class="pagination justify-content-center justify-content-md-start">
-                            <li class="page-item"><a class="page-link" href="#"><em class="icon ni ni-chevrons-left"></em></a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><span class="page-link"><em class="icon ni ni-more-h"></em></span></li>
-                            <li class="page-item"><a class="page-link" href="#">6</a></li>
-                            <li class="page-item"><a class="page-link" href="#">7</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><em class="icon ni ni-chevrons-right"></em></a></li>
-                        </ul><!-- .pagination -->
-                    </div>
-                    <div class="g">
-                        <div class="pagination-goto d-flex justify-content-center justify-content-md-start gx-3">
-                            <div>Page</div>
-                            <div>
-                                <select class="form-select" data-search="on" data-dropdown="xs center">
-                                    <option value="page-1">1</option>
-                                    <option value="page-2">2</option>
-                                    <option value="page-4">4</option>
-                                    <option value="page-5">5</option>
-                                    <option value="page-6">6</option>
-                                    <option value="page-7">7</option>
-                                    <option value="page-8">8</option>
-                                    <option value="page-9">9</option>
-                                    <option value="page-10">10</option>
-                                    <option value="page-11">11</option>
-                                    <option value="page-12">12</option>
-                                    <option value="page-13">13</option>
-                                    <option value="page-14">14</option>
-                                    <option value="page-15">15</option>
-                                    <option value="page-16">16</option>
-                                    <option value="page-17">17</option>
-                                    <option value="page-18">18</option>
-                                    <option value="page-19">19</option>
-                                    <option value="page-20">20</option>
-                                </select>
-                            </div>
-                            <div>OF 102</div>
-                        </div>
-                    </div><!-- .pagination-goto -->
-                </div><!-- .nk-block-between -->
+            <div class="card-inner p-4">
+                <table id="users-table" class="datatable-init table nowrap">
+
+                </table>
             </div>
         </div>
     </div>
 </div><!-- .nk-block -->
-<div class="nk-add-product toggle-slide toggle-slide-right" data-content="addProduct" data-toggle-screen="any" data-toggle-overlay="true" data-toggle-body="true" data-simplebar>
+<div class="nk-add-product toggle-slide toggle-slide-right" data-content="add-user" data-toggle-screen="any" data-toggle-overlay="true" data-toggle-body="true" data-simplebar>
     <div class="nk-block-head">
         <div class="nk-block-head-content">
-            <h5 class="nk-block-title">New Product</h5>
+            <h5 class="nk-block-title">New User</h5>
             <div class="nk-block-des">
-                <p>Add information and add new product.</p>
+                <p>Add information and add new user.</p>
             </div>
         </div>
     </div><!-- .nk-block-head -->
     <div class="nk-block">
-        <div class="row g-3">
-            <div class="col-12">
-                <div class="form-group">
-                    <label class="form-label" for="product-title">Product Title</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="product-title">
+        <form class="form-validate" id="add-user-form">
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="form-label" for="full-name">Full Name</label>
+                        <div class="form-control-wrap">
+                            <input type="text" class="form-control" id="full-name" name="full_name" required>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="form-label" for="regular-price">Regular Price</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="regular-price">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <div class="form-control-wrap">
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="form-label" for="sale-price">Sale Price</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="sale-price">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone</label>
+                        <div class="form-control-wrap">
+                            <input type="text" class="form-control" id="phone" name="phone" required>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="form-label" for="stock">Stock</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="stock">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-label" for="role">Role</label>
+                        <div class="form-control-wrap ">
+                            <div class="form-control-select">
+                                <select class="form-control" id="role" name="roles" required>
+                                    <option value="">Select a role...</option>
+                                @forelse ($roles as $role)
+                                    <option value="{{ $role->name }}">{{ ucfirst($role->name) }}</option>
+                                @empty
+                                @endforelse
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="form-label" for="SKU">SKU</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="SKU">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-label" for="fv-phone">Status</label>
+                        <div class="form-control-wrap">
+                            <ul class="custom-control-group">
+                                <li>
+                                    <div class="custom-control custom-radio custom-control-pro no-control checked">
+                                        <input type="radio" class="custom-control-input valid" name="status" id="status-active" value="1" required="" aria-describedby="fv-status-error" aria-invalid="false">
+                                        <label class="custom-control-label" for="status-active">Active</label>
+                                        <span id="fv-status-error" class="invalid" style="display: none;"></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="custom-control custom-radio custom-control-pro no-control">
+                                        <input type="radio" class="custom-control-input valid" name="status" id="status-inactive" value="0" required="" aria-invalid="false">
+                                        <label class="custom-control-label" for="status-inactive">Inactive</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12">
-                <div class="form-group">
-                    <label class="form-label" for="category">Category</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="category">
+                <div class="col-12">
+                    <div class="upload-zone small bg-lighter my-2">
+                        <div class="dz-message">
+                            <span class="dz-message-text">Drag and drop file</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12">
-                <div class="form-group">
-                    <label class="form-label" for="tags">Tags</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="tags">
-                    </div>
+                <div class="col-12">
+                    <button class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add New</span></button>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="upload-zone small bg-lighter my-2">
-                    <div class="dz-message">
-                        <span class="dz-message-text">Drag and drop file</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <button class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add New</span></button>
-            </div>
-        </div>
+        </form>
     </div><!-- .nk-block -->
 </div>
 @endsection
 @section('dashboard_layouts/modal')
-    
+<!-- Edit User Modal Form -->
+<div class="modal fade" id="edit-user-modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Existing User</h5>
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <em class="icon ni ni-cross"></em>
+                </a>
+            </div>
+            <form action="#" class="form-validate is-alter" id="edit-user-form">
+                <div class="modal-body">
+                    <div class="row g-4">
+                        <div class="col-sm-12 col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label" for="edit-full-name">Full Name</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" data-msg="fullname is required" id="edit-full-name" name="full_name" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label" for="edit-email">Email</label>
+                                <div class="form-control-wrap">
+                                    <input type="email" class="form-control" id="edit-email" name="email" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label" for="edit-phone">Phone</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="edit-phone" name="phone" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label" for="edit-role">Role</label>
+                                <div class="form-control-wrap ">
+                                    <div class="form-control-select">
+                                        <select class="form-control" id="edit-role" name="roles" required>
+                                            <option value="">Select a role...</option>
+                                        @forelse ($roles as $role)
+                                            <option value="{{ $role->name }}">{{ ucfirst($role->name) }}</option>
+                                        @empty
+                                        @endforelse
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label" for="fv-phone">Status</label>
+                                <div class="form-control-wrap">
+                                    <ul class="custom-control-group">
+                                        <li>
+                                            <div class="custom-control custom-radio custom-control-pro no-control checked">
+                                                <input type="radio" class="custom-control-input valid" name="status" id="edit-status-active" value="1" required="" aria-describedby="fv-status-error" aria-invalid="false">
+                                                <label class="custom-control-label" for="edit-status-active">Active</label>
+                                                <span id="fv-status-error" class="invalid" style="display: none;"></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="custom-control custom-radio custom-control-pro no-control">
+                                                <input type="radio" class="custom-control-input valid" name="status" id="edit-status-inactive" value="0" required="" aria-invalid="false">
+                                                <label class="custom-control-label" for="edit-status-inactive">Inactive</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-primary tw-mr-2">Update</button>
+                        <button type="reset" data-dismiss="modal" class="btn btn-lg btn-light">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Edit User Modal Form -->    
 @endsection
 @section('dashboard_layouts/script')
+<script>
+
+    //Datatable
+    NioApp.DataTable('.datatable-init', {
+        responsive: {
+            details: true
+        },
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: '{{ route("admin.manage-user.list", "") }}/' + $('#role-filter').val(),
+            // data: function (d){
+            //     d.roleName = $('#role-filter').val();
+            // }
+        },
+        columns: [
+            {title: 'SN', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+            {title: 'Full Name', data: 'full_name', name: 'full_name' },
+            {title: 'Email', data: 'email', name: 'email' },
+            {title: 'Phone', data: 'phone', name: 'phone' },
+            {title: 'Role', data: 'roles', name: 'roles' },
+            {title: 'Status', data: 'status', name: 'status' },
+            {
+                title: 'Actions',
+                data: null,
+                name: 'actions', 
+                orderable: false, 
+                searchable: false, 
+                render: function (data, type, row){
+                    const userJSON = jsonStringParser(row);
+                    return `
+                    <td>
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <ul class="link-list-opt no-bdr">
+                                    <li><a href="#" data-toggle="modal" data-target="#edit-user-modal" data-info="${userJSON}">
+                                        <em class="icon ni ni-edit"></em><span>Edit User</span>
+                                    </a></li>
+                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>View User</span></a></li>
+                                    <li><a href="#" onclick="deleteUser(${row.id})"><em class="icon ni ni-trash"></em><span>Remove User</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    `;
+                }
+            }
+        ],
+    });
+
+    // Handle change event of role filter
+    $('#role-filter').on('change', function() {
+        $('.datatable-init').DataTable().ajax.url('{{ route("admin.manage-user.list", "") }}/' + $(this).val()).load();
+    });
+
+    // Add User
+    $('#add-user-form').on('submit', function(e){
+        e.preventDefault();
+        if($('#add-user-form').valid()){
+            const formData = $('#add-user-form').serialize();
+            axios.post('manage-user', formData)
+                .then(response => {
+                    vt.success(response.data);
+                    // $('.datatable-init').DataTable().ajax.reload();
+                    // alternative way to refresh datatable which has extra filter involved
+                    $('#role-filter').val($('#add-user-form select[name="roles"]').val()).trigger('change');
+                    $("#add-user-form").trigger("reset");
+                    $('div[data-content="add-user"]').removeClass("content-active");
+                    $('body').removeClass("toggle-shown");
+                    $('.toggle-overlay[data-target="add-user"]').remove();
+                })
+                .catch(error => {
+                    vt.error(error.response.data.message);
+                });
+        }
+    });
+
+    let toEditUser = {};
+    $(document).on('click','[data-target="#edit-user-modal"]', function(e){
+        toEditUser = $(this).data('info');
+        $('#edit-full-name[name="full_name"]').val(toEditUser.full_name);
+        $('#edit-email[name="email"]').val(toEditUser.email);
+        $('#edit-phone[name="phone"]').val(toEditUser.phone);
+        $('#edit-role[name="roles"]').val(toEditUser.roles);
+        $('#edit-user-form input[name=status][value=' + toEditUser.status + ']').prop('checked',true);
+    });
     
+    // Update User
+    $('#edit-user-form').on('submit', function(e){
+        e.preventDefault();
+
+        // Get latest edited form data
+        editFormData = {
+            'id': toEditUser.id,
+            'full_name': $('#edit-full-name[name="full_name"]').val(),
+            'email': $('#edit-email[name="email"]').val(),
+            'phone': $('#edit-phone[name="phone"]').val(),
+            'status': $('#edit-user-form input[name="status"]').val(),
+            'roles': $('#edit-role[name="roles"]').val(),
+        };
+
+        if($('#edit-user-form').valid()){
+            axios.patch('manage-user/'+editFormData.id, editFormData)
+                .then(response => {
+                    vt.success(response.data);
+                    $('.datatable-init').DataTable().draw(false);
+                    $('#edit-user-modal a.close').trigger('click');
+                }).catch(err => {
+                    vt.error(err.response.data.message);
+                })
+        }
+    });
+
+    // Delete User
+    function deleteUser(id){
+        Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0971fe',
+                confirmButtonText: 'Yes, delete it!'
+            })
+            .then(function(result) {
+                if (result.value) {
+                    axios.delete("manage-user/" + id)
+                        .then(res => {
+                            vt.success(res.data);
+                            $('.datatable-init').DataTable().draw(false);
+                        }).catch(err => {
+                            vt.error(err.response.data.message);
+                        })
+                }
+            });
+    }
+</script>
 @endsection
