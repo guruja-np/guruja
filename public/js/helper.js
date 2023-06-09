@@ -229,3 +229,7 @@ var extend = function (obj, ext) {
 var jsonStringParser = function (data) {
 	return JSON.stringify(data).replace(/"/g, "&quot;").replace(/'/g, "&#039;")
 }
+
+var getFirstLetters = function (str) {
+	return str.split(' ').map(word => word.charAt(0)).join('');
+}

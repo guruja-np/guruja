@@ -120,10 +120,17 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="upload-zone small bg-lighter my-2">
-                        <div class="dz-message">
-                            <span class="dz-message-text">Drag and drop file</span>
+                    <div class="form-group">
+                        <label class="form-label" for="customFileLabel">Profile Picture</label>
+                        <div class="form-control-wrap">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="add-user-image" name="user_image" accept="image/*">
+                                <label class="custom-file-label" for="add-user-image">Choose file</label>
+                            </div>
                         </div>
+                    </div>
+                    <div>
+                        <img id="preview-add-image" src="#" alt="Preview Image" style="display: none;">
                     </div>
                 </div>
                 <div class="col-12">
@@ -210,6 +217,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-12 col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label" for="customFileLabel">Profile Picture</label>
+                                <div class="form-control-wrap">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="edit-user-image" name="user_image" accept="image/*">
+                                        <label class="custom-file-label" for="edit-user-image">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <img id="preview-edit-image" src="#" alt="Preview Image" style="display: none;">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer ">
@@ -242,7 +263,23 @@
         },
         columns: [
             {title: 'SN', data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
-            {title: 'Full Name', data: 'full_name', name: 'full_name' },
+            {
+                title: 'Full Name', 
+                data: null, 
+                render: function (data, type, row) {
+                    let fullNameTd = `<span class="tb-product d-flex align-items-center">`;
+                    if(row.avatar == null){
+                        fullNameTd += `<div class="user-avatar sq bg-primary tw-capitalize"><span>${getFirstLetters(row.full_name)}</span></div>`;
+                    }else{
+                        fullNameTd += `<img src="${row.avatar}" alt="" class="thumb rounded" height="40">`;
+                    }
+                    fullNameTd += `
+                        <span class="title ml-1">${row.full_name}</span>
+                    </span>
+                    `;
+                    return fullNameTd;
+                }
+            },
             {title: 'Email', data: 'email', name: 'email' },
             {title: 'Phone', data: 'phone', name: 'phone' },
             {title: 'Role', data: 'roles', name: 'roles' },
@@ -250,7 +287,6 @@
             {
                 title: 'Actions',
                 data: null,
-                name: 'actions', 
                 orderable: false, 
                 searchable: false, 
                 render: function (data, type, row){
@@ -281,25 +317,98 @@
         $('.datatable-init').DataTable().ajax.url('{{ route("admin.manage-user.list", "") }}/' + $(this).val()).load();
     });
 
+    // Preview image for add form
+    $('#add-user-image').change(function() {
+        let file = this.files[0];
+        let fileSize = file.size;
+        let fileType = file.type;
+
+        if(!fileType.startsWith('image/')){
+            vt.error('File type should be of image');
+            this.value = '';
+            return;
+        }
+
+        // error thrown if file size more than 2 Mb
+        if(fileSize > 2 * 1024 * 1024){
+            vt.error('Profile Picture shouldn\'t exceed 2 Mb');
+            this.value = '';
+            return;
+        }
+
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            $('#preview-add-image').attr('src', e.target.result);
+            $('#preview-add-image').show();
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // Preview image for edit form
+    $('#edit-user-image').change(function() {
+        let file = this.files[0];
+        let fileSize = file.size;
+        let fileType = file.type;
+
+        if(!fileType.startsWith('image/')){
+            vt.error('File type should be of image');
+            this.value = '';
+            return;
+        }
+
+        // error thrown if file size more than 2 Mb
+        if(fileSize > 2 * 1024 * 1024){
+            vt.error('Profile Picture shouldn\'t exceed 2 Mb');
+            this.value = '';
+            return;
+        }
+
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            $('#preview-edit-image').attr('src', e.target.result);
+            $('#preview-edit-image').show();
+        };
+        reader.readAsDataURL(file);
+    });
+
+    function clearPreviewAddImage(){
+        $('#preview-add-image').attr('src', '#');
+        $('#preview-add-image').hide();
+    }
+
     // Add User
     $('#add-user-form').on('submit', function(e){
         e.preventDefault();
         if($('#add-user-form').valid()){
-            const formData = $('#add-user-form').serialize();
-            axios.post('manage-user', formData)
-                .then(response => {
-                    vt.success(response.data);
-                    // $('.datatable-init').DataTable().ajax.reload();
-                    // alternative way to refresh datatable which has extra filter involved
-                    $('#role-filter').val($('#add-user-form select[name="roles"]').val()).trigger('change');
-                    $("#add-user-form").trigger("reset");
-                    $('div[data-content="add-user"]').removeClass("content-active");
-                    $('body').removeClass("toggle-shown");
-                    $('.toggle-overlay[data-target="add-user"]').remove();
-                })
-                .catch(error => {
-                    vt.error(error.response.data.message);
-                });
+            const formData = {
+                'full_name': $('#full-name[name="full_name"]').val(),
+                'email': $('#email[name="email"]').val(),
+                'phone': $('#phone[name="phone"]').val(),
+                'status': $('#add-user-form input[name="status"]').val(),
+                'roles': $('#role[name="roles"]').val(),
+                'user_image': $('#add-user-image').prop('files')[0],
+            };
+            const storeFormData = convertToFormData(formData);
+
+            axios.post('manage-user', storeFormData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(response => {
+                vt.success(response.data);
+                // $('.datatable-init').DataTable().ajax.reload();
+                // alternative way to refresh datatable which has extra filter involved
+                $('#role-filter').val($('#add-user-form select[name="roles"]').val()).trigger('change');
+                $("#add-user-form").trigger("reset");
+                clearPreviewAddImage();
+                $('div[data-content="add-user"]').removeClass("content-active");
+                $('body').removeClass("toggle-shown");
+                $('.toggle-overlay[data-target="add-user"]').remove();
+            })
+            .catch(error => {
+                vt.error(error.response.data.message);
+            });
         }
     });
 
@@ -311,27 +420,38 @@
         $('#edit-phone[name="phone"]').val(toEditUser.phone);
         $('#edit-role[name="roles"]').val(toEditUser.roles);
         $('#edit-user-form input[name=status][value=' + toEditUser.status + ']').prop('checked',true);
+
+        if(toEditUser.avatar != null){
+            $('#preview-edit-image').attr('src', toEditUser.avatar);
+            $('#preview-edit-image').show();
+        }else{
+            $('#preview-edit-image').attr('src', '#');
+            $('#preview-edit-image').hide();
+        }
     });
     
     // Update User
     $('#edit-user-form').on('submit', function(e){
         e.preventDefault();
-
-        // Get latest edited form data
-        editFormData = {
-            'id': toEditUser.id,
-            'full_name': $('#edit-full-name[name="full_name"]').val(),
-            'email': $('#edit-email[name="email"]').val(),
-            'phone': $('#edit-phone[name="phone"]').val(),
-            'status': $('#edit-user-form input[name="status"]').val(),
-            'roles': $('#edit-role[name="roles"]').val(),
-        };
-
+        
         if($('#edit-user-form').valid()){
-            axios.patch('manage-user/'+editFormData.id, editFormData)
+            // Get latest edited form data
+            const formData = {
+                'id': toEditUser.id,
+                'full_name': $('#edit-full-name[name="full_name"]').val(),
+                'email': $('#edit-email[name="email"]').val(),
+                'phone': $('#edit-phone[name="phone"]').val(),
+                'status': $('#edit-user-form input[name="status"]').val(),
+                'roles': $('#edit-role[name="roles"]').val(),
+                'user_image': $('#edit-user-image').prop('files')[0],
+            };
+            const storeFormData = convertToFormData(formData);
+            storeFormData.append("_method", "PATCH");
+            axios.post('manage-user/'+formData.id, storeFormData)
                 .then(response => {
                     vt.success(response.data);
                     $('.datatable-init').DataTable().draw(false);
+                    $("#edit-user-form").trigger("reset");
                     $('#edit-user-modal a.close').trigger('click');
                 }).catch(err => {
                     vt.error(err.response.data.message);

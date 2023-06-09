@@ -28,9 +28,9 @@ class UserService
 
             $newUser->assignRole($userData['roles']);
 
-            // if (request()->has('userImage') && request('userImage') != null) {
-            //     $newUser->addMediaFromRequest('userImage')->toMediaCollection('avatar');
-            // }
+            if (request()->has('user_image') && request('user_image') != null) {
+                $newUser->addMediaFromRequest('user_image')->toMediaCollection('avatar');
+            }
 
             // If all good then store all the records to the relivent table
             DB::commit();
@@ -72,9 +72,9 @@ class UserService
                 'status' => $userData['status'],
             ]);
 
-            // if (request()->has('userImage') && request('userImage') != null) {
-            //     $newUser->addMediaFromRequest('userImage')->toMediaCollection('avatar');
-            // }
+            if (request()->has('user_image') && request('user_image') != null) {
+                $user->addMediaFromRequest('user_image')->toMediaCollection('avatar');
+            }
 
             // If all good then store all the records to the relivent table
             DB::commit();

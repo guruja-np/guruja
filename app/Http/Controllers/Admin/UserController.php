@@ -25,19 +25,12 @@ class UserController extends Controller
     public function index()
     {
         $dataReturn['roles'] = Role::select(['id','name'])->get();
-        //filtering users based on roles with name & id,
-        // $dataReturn['users'] = User::role('admin')->with('roles:id,name')->get();
-        // $roleId = 1;
-        // $dataReturn['users'] = User::whereHas('roles', function ($query) use ($roleId){
-        //     $query->where('roles.id', $roleId);
-        // })->with('roles:id,name')->get();
         return view('admin.users', $dataReturn);
     }
 
     public function getUsers(Request $request, $roleName)
     {
         if($request->ajax()){
-            // return $roleName;
             $usersQuery = in_array($roleName, ['all','',null])
                 ? User::with('roles:id,name')
                 : User::role($roleName)->with('roles:id,name');
@@ -96,7 +89,6 @@ class UserController extends Controller
     {
         if($request->ajax()){
             $updatedUser = $this->userService->update($request->validated(), $id);
-
             if($updatedUser === true){
                 return Response::json('Updated Successfully!');
             }
